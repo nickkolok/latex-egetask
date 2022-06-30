@@ -1,0 +1,216 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{egetask}
+  [2022/06/22 v0.0.2 Create task sets for EGE - Russian state exam]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%                            BARE TASKS                         %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Font
+\renewcommand{\rmdefault}{Tempora-TLF}
+
+\def\tasknumberwidth{0.85cm}
+\providecommand{\placeforanswer}{\vspace{0.2cm}\hfill\breakОтвет:~\underline{\hspace{4.5cm}}.}
+\providecommand{\egetasknumber}[1]{\framebox[\tasknumberwidth][c]{\textbf{#1}}}
+
+\newenvironment{rawtaskN}[1]{%
+\noindent
+\begin{minipage}[t]{0.9cm}
+\egetasknumber{#1}
+\end{minipage}
+\hspace{0.1cm}
+\begin{minipage}[t]{10.7cm}
+\linespread{1.2}
+}{%
+\end{minipage}
+}
+
+\newenvironment{taskBN}[1]{%
+	\begin{rawtaskN}{#1}
+}{%
+	\placeforanswer
+	\end{rawtaskN}
+	\vspace{0.8cm plus 0.1cm}
+}
+
+\newenvironment{taskCN}[1]{%
+	\begin{rawtaskN}{#1}
+}{%
+	\end{rawtaskN}
+	\vspace{1.2cm plus 0.1cm}
+}
+
+
+\providecommand{\addpictocenter}[2][width=0.98\linewidth]{%
+	\begin{center}
+		\includegraphics[#1]{#2}
+	\end{center}%
+}
+
+\RequirePackage{wrapfig}
+\providecommand{\addpictoright}[2][0.25\linewidth]{%
+	\setlength{\columnsep}{0.5cm}%
+	\begin{wrapfigure}{r}{#1}%
+		\includegraphics[width=\linewidth]{#2}%
+	\end{wrapfigure}%
+	\vspace{-0.25cm}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%                         PARTS  DESIGN                         %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\providecommand{\captionofpartone}{
+	\begin{center}
+		\textbf{Часть 1}
+	\end{center}
+}
+
+\def\textintroofpartone{%
+	В части 1 учитываются только ответы, но не решения.
+	Не забудьте перенести ответы в БЛАНК ОТВЕТОВ №1 справа от номера
+	соответствующего задания, начиная с первой клеточки.
+}
+
+\providecommand{\introofpartone}{
+	\hspace{\tasknumberwidth}
+	\framebox[11.5cm]{
+		\begin{minipage}{11.4cm}
+			\linespread{1}
+			\textbf{\textit{\textintroofpartone}}
+		\end{minipage}
+	}
+	\vspace{0.8cm}
+}
+
+\providecommand{\startpartone}[1]{
+	\normalsize
+	\newpage
+	\captionofpartone
+	\raggedbottom
+	\introofpartone
+}
+
+
+
+
+% https://tex.stackexchange.com/questions/451786/how-do-i-put-a-circle-around-a-symbol
+\providecommand{\oexclam}{\ensuremath{\mathbin{\mathpalette\make@circled{\textbf{!}}}}}
+\providecommand{\make@circled}[2]{%
+  \ooalign{$\m@th#1\smallbigcirc{#1}$\cr\hidewidth$\m@th#1#2$\hidewidth\cr}%
+}
+\providecommand{\smallbigcirc}[1]{%
+  \vcenter{\hbox{\scalebox{1.6}{$\m@th#1\bigcirc$}}}%
+}
+
+\providecommand{\textreminderforpartone}{%
+	Не забудьте перенести все ответы в бланк ответов №\,1
+	в соответствии с инструкцией по выполнению работы.
+	\\
+	Проверьте, чтобы каждый ответ был записан в строке с номером
+	соответствующего задания.
+}
+
+\providecommand{\oexclamedreminder}[1]{%
+	\noindent%
+	{\Huge\oexclam}%
+	\framebox[11.0cm][c]{
+		\begin{minipage}{10.8cm}
+			\textbf{\textit{#1}}
+		\end{minipage}
+	}
+}
+
+\providecommand{\reminderforpartone}{%
+	\oexclamedreminder{\textreminderforpartone}
+}
+
+\providecommand{\captionofparttwo}{
+	\begin{center}
+		\textbf{Часть 2}
+	\end{center}
+}
+
+
+\def\textintroofparttwo{%
+	Для записи решений и ответов на задания части 2 используйте БЛАНК ОТВЕТОВ №\,2.
+}
+
+\providecommand{\introofparttwo}{
+	\hspace{\tasknumberwidth}
+	\framebox[11.5cm]{
+		\begin{minipage}{11.4cm}
+			\linespread{1}
+			\textbf{\textit{\textintroofparttwo}}
+		\end{minipage}
+	}
+	\vspace{0.8cm}
+}
+
+
+\providecommand{\startparttwo}{
+	\normalsize
+	\reminderforpartone
+	\newpage
+	\captionofparttwo
+	\raggedbottom
+	\introofparttwo
+}
+
+
+
+
+\providecommand{\textreminderforparttwo}{%
+	Проверьте, чтобы каждый ответ был записан рядом с номером
+	соответствующего задания.
+}
+
+\providecommand{\reminderforparttwo}{%
+	\vspace{0.7cm}
+	\oexclamedreminder{\textreminderforparttwo}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%                     HEADERS  &  FOOTERS                       %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\RequirePackage[
+	landscape,
+	left = 1cm,
+	right = 1cm,
+	top = 1.8cm,
+	bottom = 1.8cm,
+%	headsep=0.5cm
+]{geometry}
+
+\setlength{\columnseprule}{0.4pt}
+%\RequirePackage{etoolbox}
+%\patchcmd{\@outputdblcol}{\vrule \@width\columnseprule}{%
+%	\vrule \@depth10cm \@width\columnseprule%
+%}{}{}
+
+
+\RequirePackage[page]{totalcount}
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+%\fancyhf{\vspace{-3cm}\hfill\vrule\@depth10cm\hfill}
+
+\renewcommand{\headrule}{}
+
+\def\examname{}
+\def\examdisc{}
+\def\examvart{}
+
+\def\lfoottext{}
+\def\rfoottext{}
+
+\lhead{\parbox{\columnwidth}{\footnotesize\examname \hfill \examdisc}}
+\rhead{\parbox{\columnwidth}{\footnotesize\examvart \hfill \thepage/\totalpages}}
+
+\lfoot{\parbox{\columnwidth}{\footnotesize\centering\lfoottext}}
+\rfoot{\parbox{\columnwidth}{\footnotesize\centering\rfoottext}}
