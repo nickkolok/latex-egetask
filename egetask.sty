@@ -48,6 +48,49 @@
 	\end{center}%
 }
 
+\newcommand{\imageScale}{0.25}
+
+\newcommand{\scale}[1]{%
+    \ifcase#1\relax
+    \or\imageScale% 1
+    \or\imageScale% 2
+    \or\imageScale% 3
+    \or\imageScale% 4
+    \or\imageScale% 5
+    \or\imageScale% 6
+    \or\imageScale% 7
+    \or\imageScale% 8
+    \or\imageScale% 9
+    \or\imageScale% 10
+    \or\imageScale% 11
+    \or\imageScale% 12
+    \else \imageScale% по умолчанию
+    \fi
+}
+
+\newlength{\cardWidth}
+\setlength{\cardWidth}{0.9\linewidth}
+
+\newlength{\imageSize}
+\setlength{\imageSize}{0.3\linewidth}
+
+\newcommand{\size}[1]{%
+    \ifcase#1\relax
+    \or\imageSize% 1
+    \or\imageSize% 2
+    \or\imageSize% 3
+    \or\imageSize% 4
+    \or\imageSize% 5
+    \or\imageSize% 6
+    \or\imageSize% 7
+    \or\imageSize% 8
+    \or\imageSize% 9
+    \or\imageSize% 10
+    \or\imageSize% 11
+    \or\imageSize% 12
+    \else \imageSize% по умолчанию
+    \fi
+}
 \RequirePackage{wrapfig}
 \providecommand{\addpictoright}[2][0.25\linewidth]{%
 	\setlength{\columnsep}{0.5cm}%
